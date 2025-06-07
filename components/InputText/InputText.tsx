@@ -25,6 +25,7 @@ const InputText: React.FC<InputProps> = ({
       value={state}
       style={styles.container}
       placeholder={placeholder}
+      placeholderTextColor={'#999'}
       onChangeText={onChangeText}
     />
   );

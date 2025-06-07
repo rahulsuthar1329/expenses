@@ -12,13 +12,15 @@ import styles from './ChatScreen.styled';
 import Chat from '../../components/Chat/Chat';
 import Octicons from 'react-native-vector-icons/Octicons';
 import {useAppSelector} from '../../hooks';
-import {useGetChatsQuery} from '../../services/chatApi';
+import {useGetChatsQuery} from '../../services/chatService';
 import Loader from '../../components/Loader/Loader';
 import SomethingWentWrong from '../../components/SomethingWentWrong/SomethingWentWrong';
 
 const ChatScreen = () => {
   const [search, setSearch] = useState('');
-  const {user} = useAppSelector(state => state.userReducer);
+  const {user} = useAppSelector(state => state.user);
+  console.log({user});
+
   const {data, error, isLoading} = useGetChatsQuery();
 
   if (isLoading) return <Loader />;
@@ -27,7 +29,7 @@ const ChatScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.heading}>Hi, {user.username}</Text>
+        <Text style={styles.heading}>Hi, {user?.username}</Text>
         <View style={styles.searchbar}>
           <Octicons name="search" size={20} color={'#949393'} />
           <TextInput

@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -15,27 +15,19 @@ import More from '../../assets/more.png';
 import Send from '../../assets/send.png';
 import EmojiModal from 'react-native-emoji-modal';
 import Octicons from 'react-native-vector-icons/Octicons';
-import {useGetMessagesQuery} from '../../services/chatApi';
+import {useGetMessagesQuery} from '../../services/chatService';
 import Loader from '../../components/Loader/Loader';
 import {MessageType} from '../../types/chatTypes';
 import SomethingWentWrong from '../../components/SomethingWentWrong/SomethingWentWrong';
-// import {io} from 'socket.io-client';
-import {baseUrl} from '../../path';
-import {showToast} from '../../components/Toast/Toast';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {addMessage} from '../../features/ChatSlice';
-import {useSocket} from '../../context/SocketContext';
-
-// const socket = io(baseUrl);
 
 const Conversation: React.FC = ({navigation, route}: any) => {
   const {chatDetails} = route.params;
   const [message, setMessage] = useState('');
   const [emojiModal, setEmojiModal] = useState(false);
-  const {sendMessage} = useSocket();
   const user = {_id: '5353', username: 'rahul.123'};
   const dispatch = useAppDispatch();
-  const chatt = useAppSelector(state => state.chatReducer.chats);
+  const chatt = useAppSelector(state => state.chat.chats);
 
   const {
     data: initialMessages,
@@ -186,9 +178,7 @@ const Conversation: React.FC = ({navigation, route}: any) => {
             style={styles.msgBar}
           />
         </View>
-        <TouchableOpacity
-          activeOpacity={0.8}
-          onPress={() => sendMessage(message)}>
+        <TouchableOpacity activeOpacity={0.8} onPress={() => {}}>
           <Image source={Send} style={styles.send} />
         </TouchableOpacity>
       </View>

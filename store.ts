@@ -2,14 +2,20 @@ import {configureStore} from '@reduxjs/toolkit';
 import chatReducer from './features/ChatSlice';
 import userReducer from './features/UserSlice';
 import {setupListeners} from '@reduxjs/toolkit/query';
-import {chatApi} from './services/chatApi';
+import {chatService} from './services/chatService';
+import {authService} from './services/authService';
 
 export const store = configureStore({
-  reducer: {[chatApi.reducerPath]: chatApi.reducer, chatReducer, userReducer},
+  reducer: {
+    [chatService.reducerPath]: chatService.reducer,
+    [authService.reducerPath]: authService.reducer,
+    chat: chatReducer,
+    user: userReducer,
+  },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: false,
-    }).concat(chatApi.middleware),
+    }).concat(chatService.middleware, authService.middleware),
 });
 
 setupListeners(store.dispatch);

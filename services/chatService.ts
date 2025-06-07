@@ -2,8 +2,8 @@ import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import {baseUrl} from '../path';
 import {ChatStateType, MessageType} from '../types/chatTypes';
 
-export const chatApi = createApi({
-  reducerPath: 'chatApi',
+export const chatService = createApi({
+  reducerPath: 'chatService',
   baseQuery: fetchBaseQuery({baseUrl}),
   endpoints: builder => ({
     getChats: builder.query<ChatStateType, void>({
@@ -14,4 +14,4 @@ export const chatApi = createApi({
     }),
   }),
 });
-export const {useGetChatsQuery, useGetMessagesQuery} = chatApi;
+export const {useGetChatsQuery, useGetMessagesQuery} = chatService;

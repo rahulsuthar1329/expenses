@@ -12,11 +12,7 @@ import RegisterScreen from './screens/RegisterScreen/RegisterScreen';
 import ForgotPassword from './screens/ForgotPassword/ForgotPassword';
 import {store} from './store';
 import {Provider} from 'react-redux';
-import {decryptMessage, encryptMessage} from './utils/cryptoService';
-
-const enctext = encryptMessage('HELLO WORLD');
-console.log(enctext);
-console.log(decryptMessage(enctext));
+import VerifyOTP from './screens/VerifyOTP/VerifyOTP';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,7 +21,7 @@ function App(): React.JSX.Element {
     <Provider store={store}>
       <SocketProvider>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName={Screen.login}>
+          <Stack.Navigator initialRouteName={Screen.chat}>
             <Stack.Screen
               name={Screen.home}
               component={HomeScreen}
@@ -44,6 +40,11 @@ function App(): React.JSX.Element {
             <Stack.Screen
               name={Screen.forgot_password}
               component={ForgotPassword}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name={Screen.verify_otp}
+              component={VerifyOTP}
               options={{headerShown: false}}
             />
             <Stack.Screen

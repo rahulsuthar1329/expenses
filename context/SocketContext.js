@@ -6,7 +6,7 @@ import React, {
   useContext,
 } from 'react';
 import {io} from 'socket.io-client';
-import {baseUrl} from '../path';
+import {SocketUrl} from '../path';
 
 const SocketContext = createContext(null);
 
@@ -24,9 +24,7 @@ export const SocketProvider = ({children}) => {
   const sendMessage = useCallback(
     msg => {
       if (socket) {
-        console.log({socket});
         socket.emit('newMessage', {message: msg});
-        console.log('Socket exist');
       } else console.log("Socket doesn't exist");
     },
     [socket],
@@ -42,7 +40,7 @@ export const SocketProvider = ({children}) => {
   );
 
   useEffect(() => {
-    const _socket = io(baseUrl);
+    const _socket = io(SocketUrl);
     _socket.on('message', onMessageRec);
     setSocket(_socket);
 
